@@ -1,0 +1,28 @@
+/* Empty. Add your own CSS if you like */
+.app { 
+	background-color:  #000!important;
+ }
+
+ a {
+ 	text-decoration: none;
+ }
+
+ .tabactive {
+ 	background-color: #324354;
+ 	color: #FFF;
+ }
+
+ .tabinactive {
+ 	background-color: #252525;
+ 	color: #FFF;
+ }
+
+
+@font-face {
+    font-family: Carviar;
+    src: url(../fonts/CaviarDreams.ttf);
+}
+
+body {
+	font-family: Carviar;
+}

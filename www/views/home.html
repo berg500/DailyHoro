@@ -1,0 +1,62 @@
+<ion-view view-title="Daily Horoscope">
+    <ion-content ng-controller="dailyController" style="background-color: #000">
+        <div style="text-align: center">
+        <p></p>
+            <span style="color: #fff">Please Select your Zodiac</span>
+        </div>
+        <div ng-repeat="zodiac in sodiac" height="10%">
+            <div ng-if="($index) % 3 == 0" class="row" >
+               
+                <div class="col col-33" style="text-align: center;">            
+                 <a href="#/detail/{{sodiac[$index].sign}}/{{sodiac[$index].name}}"> 
+                        <div>
+                            <div style="text-align: center;" >
+                                <img src="./img{{sodiac[$index].image}}" width="50%"/>
+                            </div>
+                            <div style="text-align: center;color: #fff;">
+                                <label style="font-size: 1em">{{sodiac[$index].name}}</label>
+                                <div style="font-size: 0.7em; ">
+                                    {{sodiac[$index].date}}
+                                </div>
+                            </div>
+                        </div>
+                </a>
+                </div>
+               
+                <div class="col col-33" style="text-align: center">
+                  <a href="#/detail/{{sodiac[$index+1].sign}}/{{sodiac[$index+1].name}}"> 
+                        <div>
+                            <div style="text-align: center;padding: auto">
+                                <img src="./img{{sodiac[$index+1].image}}" width="50%" />
+                            </div>
+                            <div style="text-align: center;color: #fff;">
+                                <span>{{sodiac[$index+1].name}}</span>
+                                 <div style="font-size: 0.7em;">
+                                    {{sodiac[$index+1].date}}
+                                </div>
+                            </div>
+                        </div>
+              
+                     </a>
+                </div>
+                <div class="col col-33" style="text-align: center">
+                 <a href="#/detail/{{sodiac[$index+2].sign}}/{{sodiac[$index+2].name}}">
+                        <div>
+                            <div style="text-align: center">
+                                <img src="./img{{sodiac[$index+2].image}}" width="50%" />
+                            </div>
+                            <div style="text-align: center;color: #fff;">
+                                <span>{{sodiac[$index+2].name}}</span>
+                                 <div style="font-size: 0.7em;">
+                                    {{sodiac[$index+2].date}}
+                                </div>
+                            </div>
+                        </div>
+                 
+                      </a>
+                </div>
+              
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

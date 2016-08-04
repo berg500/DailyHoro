@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controller/main.js"></script>
+    <script src="js/controller/detail.js"></script>
+    <script src="js/admob_load.js"></script>
+</head>
+
+<body ng-app="starter" class="app">
+<script>
+  // place our admob ad unit id here
+  var admobid = {};
+  if( /(android)/i.test(navigator.userAgent) ) {
+    admobid = { // for Android
+          banner: 'ca-app-pub-9573035679597503/3387980271',
+        interstitial: 'ca-app-pub-9573035679597503/7228887475'
+    };
+  } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+    admobid = { // for iOS
+    banner: 'ca-app-pub-9573035679597503/7438297072',
+    interstitial: 'ca-app-pub-9573035679597503/8915030279'
+    };
+  } else {
+    admobid = { // for Windows Phone
+      banner: 'ca-app-pub-6869992474017983/8878394753',
+      interstitial: 'ca-app-pub-6869992474017983/1355127956'
+    };
+  }
+
+  function createSelectedBanner(){
+    if(AdMob) AdMob.createBanner({
+      adId: admobid.banner,
+      overlap: $('#overlap').is(':checked'),
+      offsetTopBar: $('#offsetTopBar').is(':checked'),
+      adSize: $('#adSize').val(),
+      position: $('#adPosition').val(),
+    });
+  }
+
+  function showBannerAtPosition(){
+    if(AdMob) AdMob.showBanner( $('#adPosition').val() );
+  }
+
+  function onDeviceReady() {
+    if (! AdMob) { alert( 'admob plugin not ready' ); return; }
+
+    initAd();
+
+    // display a banner at startup
+    createSelectedBanner();
+  }
+
+  function initAd(){
+    AdMob.getAdSettings(function(info){
+      console.log('adId: ' + info.adId + '\n' + 'adTrackingEnabled: ' + info.adTrackingEnabled);
+    }, function(){
+      console.log('failed to get user ad settings');
+    });
+
+    AdMob.setOptions({
+      // adSize: 'SMART_BANNER',
+      position: AdMob.AD_POSITION.BOTTOM_CENTER,
+      isTesting: true, // set to true, to receiving test ad for testing purpose
+      bgColor: 'black', // color name, or '#RRGGBB'
+      // autoShow: true // auto show interstitial ad when loaded, set to false if prepare/show
+      // offsetTopBar: false, // avoid overlapped by status bar, for iOS7+
+    });
+
+    // new events, with variable to differentiate: adNetwork, adType, adEvent
+    $(document).on('onAdFailLoad', function(e){
+      // when jquery used, it will hijack the event, so we have to get data from original event
+      if(typeof e.originalEvent !== 'undefined') e = e.originalEvent;
+      var data = e.detail || e.data || e;
+
+      alert('error: ' + data.error +
+          ', reason: ' + data.reason +
+          ', adNetwork:' + data.adNetwork +
+          ', adType:' + data.adType +
+          ', adEvent:' + data.adEvent); // adType: 'banner', 'interstitial', etc.
+    });
+    $(document).on('onAdLoaded', function(e){
+    });
+    $(document).on('onAdPresent', function(e){
+    });
+    $(document).on('onAdLeaveApp', function(e){
+    });
+    $(document).on('onAdDismiss', function(e){
+    });
+
+</script>
+
+    <ion-nav-bar class="bar-dark" align-title="center">
+  
+    </ion-nav-bar>
+    <ion-nav-view animation="slide-left-right">
+      <!-- Center content -->
+    </ion-nav-view>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+
+<ion-view view-title="{{title}}" ng-controller="detailController">
+	<<ion-nav-buttons side="left">
+	  <button class="button button-clear" ng-click="backMain()">
+	    < Back
+	  </button>
+	</ion-nav-buttons>
+  <ion-content style="background-color:#000">
+  	<div style="">
+  		<div style="padding : 3px 3px 3px 3px;width:20%;display:inline-block;">
+  		  <img src="./img/icon/{{title}}.png" width="100%"/>
+  		</div>
+  		<div style="display:inline-block;width:70%;height: 50px;vertical-align:top;padding-top:10px;padding-left: 10px">
+  			<span style="color: #fff;font-size: 1.2em;">{{title}}</span><p>
+  			<span style="color: #fff">As Of : {{curdate}}</span>
+  		</div>
+  	</div>
+	<div style="height: 40px;background-color: #252525;border-top: 1px solid red; border-bottom: 1px solid red;padding-top: 1px ">
+		<div class="{{todayClass}}" style="width:25%;display: inline-block;text-align: center;height: 35px;padding-top: 5px;color: #fff" ng-click="changeClass(0)" >
+			 <span style="font-size: 0.9em">Overall</span>
+		</div>
+		<div class="{{tomorrowClass}}" style="width:22%;display: inline-block;text-align: center;height: 35px;padding-top: 5px"	ng-click="changeClass(1)">
+			<span style="font-size: 0.9em">Love</span>
+		</div>
+		<div class="{{weekClass}}" style="width:23%;display: inline-block;text-align: center;height: 35px;padding-top: 5px"	ng-click="changeClass(2)">
+			<span style="font-size: 0.9em">Career</span>
+		</div>
+		<div class="{{yearClass}}" style="width:25%;display: inline-block;text-align: center;height: 35px; padding-top: 5px"	ng-click="changeClass(3)">
+			<span style="font-size: 0.9em">Wellness</span>
+		</div>
+	</div>
+	<div style="color: #fff;padding:10px">
+		{{result}}
+	</div>
+
+  </ion-content>
+</ion-view>
